@@ -5,7 +5,8 @@ class Comic {
 
   Comic({required this.name, required this.cover, required this.chapters});
 
-  factory Comic.fromJson(Map<String, dynamic> json) {
+  // I use dynamic here because the compiler complains when I use it in a map function
+  factory Comic.fromJson(dynamic json) {
     return Comic(
       name: json['Name'] as String,
       cover: json['Cover'] as String,
@@ -32,16 +33,34 @@ class Chapter {
   }
 }
 
-class MediaFolder {
+class PictureFolder {
   String name;
   List<String> files;
 
-  MediaFolder({required this.name, required this.files});
+  PictureFolder({required this.name, required this.files});
 
-  factory MediaFolder.fromJson(Map<String, dynamic> json) {
-    return MediaFolder(
+  factory PictureFolder.fromJson(dynamic json) {
+    return PictureFolder(
       name: json['Name'] as String,
       files: (json['Files'] as List?)?.map((e) => e as String).toList() ?? [],
+    );
+  }
+}
+
+class Video {
+  String name;
+  String url;
+  String category;
+  String thumbnail = "";
+  int views = 0;
+
+  Video({required this.name, required this.url, required this.category});
+
+  factory Video.fromJson(dynamic json) {
+    return Video(
+      name: json['Name'] as String,
+      url: json['Url'] as String,
+      category: json['Category'] as String,
     );
   }
 }
