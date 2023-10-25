@@ -6,6 +6,7 @@ import 'package:media_viewer/app/data/api_types.dart';
 import 'package:media_viewer/app/data/constants.dart';
 import 'package:media_viewer/app/modules/home/controllers/home_controller.dart';
 import 'package:media_viewer/app/modules/home/views/load_wrapper.dart';
+import 'package:media_viewer/app/modules/home/views/video_player_view.dart';
 
 class VideosView extends GetView<HomeController> {
   const VideosView({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class VideosView extends GetView<HomeController> {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: InkWell(
         onTap: () {
-          // Get.toNamed('/video_player', arguments: video);
+          Get.bottomSheet(VideoPlayerView(video: video));
         },
         child: Column(
           children: [
@@ -65,7 +66,7 @@ class VideosView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        video.url.split("/").last,
+                        video.name,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
