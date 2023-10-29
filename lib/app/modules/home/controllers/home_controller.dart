@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:media_viewer/app/data/api_types.dart';
 import 'package:media_viewer/app/data/constants.dart';
-import 'package:media_viewer/app/modules/home/views/comics_view.dart';
-import 'package:media_viewer/app/modules/home/views/pictures_view.dart';
+import 'package:media_viewer/app/modules/home/views/comics/comics_view.dart';
+import 'package:media_viewer/app/modules/home/views/pictures/pictures_view.dart';
 import 'package:media_viewer/app/modules/home/views/videos_view.dart';
 import 'package:media_viewer/app/modules/settings/views/settings_view.dart';
 
@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   RxInt navIndex = 0.obs;
   RxList<PictureFolder> pictureFolders = <PictureFolder>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
+  Rx<HeroController> heroController = HeroController().obs;
   RxList<Video> allVideos = <Video>[].obs;
   RxList<Comic> comics = <Comic>[].obs;
 
@@ -38,9 +39,14 @@ class HomeController extends GetxController {
     }
   }
 
+  Tween<Rect?> createRectTween(Rect? begin, Rect? end) {
+    return MaterialRectArcTween(begin: begin, end: end);
+  }
+
   @override
   void onInit() async {
     await refreshData();
+    heroController.value = HeroController(createRectTween: createRectTween);
     super.onInit();
   }
 

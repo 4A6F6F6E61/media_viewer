@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:media_viewer/app/modules/home/views/pictures_view.dart';
+import 'package:media_viewer/app/modules/home/views/pictures/pictures_view.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -14,8 +14,6 @@ class HomeView extends GetView<HomeController> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.navIndex.value,
           onTap: controller.changePage,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.grey,
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
@@ -42,6 +40,7 @@ class HomeView extends GetView<HomeController> {
             return false;
           },
           child: Navigator(
+            observers: [controller.heroController.value],
             key: Get.nestedKey(1),
             onGenerateRoute: (settings) => GetPageRoute<void>(
               settings: settings,

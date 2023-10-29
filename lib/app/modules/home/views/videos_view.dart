@@ -29,22 +29,23 @@ class VideosView extends GetView<HomeController> {
           },
         ),
       ),
-      body: LoadWrapper(
-        onRefresh: () async {
-          await controller.fetchVideos();
-        },
-        child: ListView.builder(
-          itemCount: controller.allVideos.length,
-          itemBuilder: (context, index) {
-            return videoTile(controller.allVideos[index]);
+      body: Obx(
+        () => LoadWrapper(
+          onRefresh: () async {
+            await controller.fetchVideos();
           },
+          child: ListView.builder(
+            itemCount: controller.allVideos.length,
+            itemBuilder: (context, index) {
+              return videoTile(controller.allVideos[index]);
+            },
+          ),
         ),
       ),
     );
   }
 
   Widget videoTile(Video video) {
-    log("http://$serverUrl${video.url}");
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: InkWell(
