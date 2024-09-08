@@ -1,4 +1,0 @@
-[submodule "go-server"]
-	path = go-server
-	url = git@github.com:4A6F6F6E61/go-server.git
-	branch = main
